@@ -76,16 +76,6 @@ description: Use this skill whenever a user wants to verify whether content (tex
 ✓ 回避争议性立场
 ```
 
-#### 主流检测工具对比
-
-| 工具 | 最优场景 | 整体准确率（独立测试）| 假阳性率 | 定价 |
-|------|---------|-------------------|---------|------|
-| **GPTZero** | 教育场景、快速检查 | 70-80%（实际）/ 91%（官方声称）| 较高 | 免费版可用 |
-| **Originality.AI** | 专业内容团队 | 76-94% | 偶发 | $14.95/月起 |
-| **Turnitin** | 学术机构 | 84-91% | ~5-7% | 机构授权 |
-
-> ⚠️ **警告：** 所有工具对非母语英语写作者假阳性率显著偏高。《独立宣言》等历史文献曾被错标为AI。
-
 ---
 
 ### 2.2 图片检测（Image Detection）
@@ -122,12 +112,6 @@ description: Use this skill whenever a user wants to verify whether content (tex
 ✓ 整体风格过于"完美"（无噪点、无自然缺陷）
 ✓ 珠宝、眼镜等配件细节异常
 ```
-
-#### 检测工具
-- **Hive Moderation** — 多类别AI图像检测
-- **Sensity AI** — 深度伪造专业检测平台
-- **AI or Not** — 简单快速检测
-- **Google SynthID** — Google的图像水印/检测
 
 ---
 
@@ -208,11 +192,6 @@ description: Use this skill whenever a user wants to verify whether content (tex
 ✓ 发音过于标准（方言/口音完全消失）
 ```
 
-#### 主流检测工具
-- **Resemble Detect** — 专业语音深度伪造检测
-- **ElevenLabs AI Speech Classifier**
-- **VoiceRadar**（NDSS 2025研究）
-
 ---
 
 ### 2.5 文档检测（Document/PDF Detection）
@@ -249,11 +228,6 @@ description: Use this skill whenever a user wants to verify whether content (tex
 ✓ 文档来源链接/印章与官方格式不符
 ✓ 字体大小/间距在关键数字处细微异常
 ```
-
-#### 主流检测平台
-- **Inscribe** — Trust Score (0-100) + LLM解析
-- **Resistant AI** — ~1000个检测器
-- **KlearStack** — 合规级文档法证
 
 ---
 
@@ -302,7 +276,7 @@ description: Use this skill whenever a user wants to verify whether content (tex
 置信度 = (强证据数 × 3 + 中等证据数 × 1.5 + 辅助证据数 × 0.5) / 内容类型最高分
 
 解读：
-≥0.75  →  高置信度AI生成（建议进一步专业验证）
+≥0.75  →  高置信度AI生成
 0.50-0.74 →  中置信度（存在AI成分，需综合判断）
 0.25-0.49 →  低置信度（疑似AI辅助，不能确定）
 <0.25   →  可能为人类创作（不能排除AI辅助）
@@ -320,17 +294,6 @@ description: Use this skill whenever a user wants to verify whether content (tex
 >      = 11.5 / 14.5
 >      = **0.79 → 高置信度AI生成**
 
-### 各内容类型单指标置信度参考
-
-| 内容类型 | 单一工具最高可信度 | 推荐多工具组合可信度 |
-|---------|----------------|------------------|
-| 文本 | ~85% (Originality.AI) | ~90% |
-| 图片 | ~80% (专业工具) | ~88% |
-| 视频 | ~75% | ~85% |
-| 音频 | ~70% (SSL模型) | ~82% |
-| 文档PDF | ~90% (ELA+元数据) | ~95% |
-| 链接/流量 | ~85% (行为分析) | ~92% |
-
 ---
 
 ## 第四部分：检测报告生成模板
@@ -340,12 +303,10 @@ description: Use this skill whenever a user wants to verify whether content (tex
 
 **内容类型：** [文本/图片/视频/音频/文档/链接]
 **检测日期：** YYYY-MM-DD
-**检测工具：** [列举使用的工具]
 
 ### 检测结果摘要
 - **AI生成概率：** XX%
 - **置信度等级：** 高/中/低
-- **检测器共识：** X/N 个工具判定为AI
 
 ### 发现的关键证据
 
@@ -361,13 +322,11 @@ description: Use this skill whenever a user wants to verify whether content (tex
 ### 置信度计算
 总得分：(强×3 + 中×1.5 + 辅×0.5) = XX / 最高分 = XX%
 
-### 结论与建议
-[基于证据的综合判断，是否需要人工复核]
+### 结论
+[基于证据的综合判断]
 
 ### 局限性说明
 - 本报告基于当前可用检测技术，不构成法律证据
-- 假阳性/假阴性率：[引用相关工具的已知误差范围]
-- 建议与人工专业判断结合使用
 ```
 
 ---
@@ -389,19 +348,6 @@ description: Use this skill whenever a user wants to verify whether content (tex
 - 要求所有AI生成内容必须使用可检测信号标注（水印或元数据）
 - C2PA（Coalition for Content Provenance and Authenticity）标准推广中
 - 中国要求平台强制执行显性和隐性双重水印
-
----
-
-## 第六部分：快速检测工具索引
-
-| 内容类型 | 免费工具 | 专业工具 |
-|---------|---------|---------|
-| **文本** | GPTZero（免费版）、ZeroGPT | Originality.AI、Turnitin |
-| **图片** | AI or Not、Hive（部分免费）| Sensity AI、Illuminarty |
-| **视频** | Deepware Scanner | Sensity AI、Reality Defender |
-| **音频** | ElevenLabs Classifier | Resemble Detect、VoiceRadar |
-| **文档** | ExifTool（元数据）| Inscribe、Resistant AI |
-| **链接/流量** | Google Analytics（行为）| Imperva Bot Manager、HUMAN Security |
 
 ---
 
